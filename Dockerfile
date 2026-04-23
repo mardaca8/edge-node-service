@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+WORKDIR /src
+COPY src/EdgeNode/EdgeNode.csproj ./EdgeNode/
+RUN dotnet restore ./EdgeNode/EdgeNode.csproj
+COPY src/EdgeNode/ ./EdgeNode/
+RUN dotnet publish ./EdgeNode/EdgeNode.csproj -c Release -o /app /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS runtime
+WORKDIR /app
+COPY --from=build /app ./
+ENV ASPNETCORE_URLS=http://0.0.0.0:8080
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "EdgeNode.dll"]
