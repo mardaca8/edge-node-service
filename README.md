@@ -59,7 +59,7 @@ CLOUD (cloud-node :8081, +100ms) Median of 20 requests: 214.31ms
 ```
 
 ### How to reproduce
-`docker compose up -d --build`
+`docker compose up`
 
 `./bench.sh`
 
