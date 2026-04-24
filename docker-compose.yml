@@ -5,11 +5,6 @@ services:
       ports:
         - "8080:8080"
       restart: unless-stopped
-      healthcheck:                           
-        test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
-        interval: 30s                                                                           
-        timeout: 3s
-        retries: 3
     cloud-node:
       build: .
       container_name: cloud-node

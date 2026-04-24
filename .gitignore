@@ -1,3 +1,4 @@
 src/EdgeNode/obj
 src/EdgeNode/bin
 *.txt
+.DS_Store
